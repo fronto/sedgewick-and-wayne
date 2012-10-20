@@ -1,0 +1,63 @@
+<project basedir="." default="echoProperties" xmlns:ivy="antlib:org.apache.ivy.ant">
+    <description>
+    build datastructes and run tests
+    </description>
+
+  <property name="src" location="src"/>
+  <property name="tests" location="tests"/>
+  <property name="build" location="build"/>
+  <property name="main.classes" location="${build}/classes"/>
+  <property name="test.classes" location="${build}/test-classes"/>
+  <property name="dist"  location="dist"/>
+  <property name="lib"  location="lib"/>
+
+    <path id="jars">
+        <fileset dir="${lib}" />
+    </path>
+
+
+    <target name="resolve" description="--> retreive dependencies with ivy">
+        <ivy:retrieve pattern="${lib}/[artifact]-[revision].[ext]"/>
+    </target>    
+
+    <target name="compile" depends="resolve">
+        <mkdir dir="${main.classes}" />
+        <javac srcdir="${src}" destdir="${main.classes}" classpathref="jars" includeAntRuntime="false"/>
+    </target>
+
+    <target name="compile-tests" depends="compile">
+            <mkdir dir="${test.classes}" />
+            <javac srcdir="${tests}" destdir="${test.classes}" includeAntRuntime="false">
+	    	<classpath>
+			<path refid="jars" />
+			<dirset dir="${main.classes}"/>
+		</classpath>
+	    </javac>
+    </target>
+
+
+    <target name="test" depends="compile-tests">
+	<junit printsummary="yes" fork="yes" haltonfailure="yes">
+		<classpath>
+			<path refid="jars" />
+	 		<dirset dir="${main.classes}"/>
+	 		<dirset dir="${test.classes}"/>
+	    	</classpath>
+
+  		<formatter type="plain"/>
+	    <batchtest>
+	 	<fileset dir="${test.classes}"/>
+	    </batchtest>
+	
+	</junit>
+    </target>
+
+  <target name="echoProperties">
+    <echo message="src: ${src}" />
+    <echo message="build: ${build}" />
+    <echo message="dist:${dist}" />
+     <echo message="ivy.retireve.pattern: ${ivy.retrieve.pattern}" />    
+  </target> 
+
+</project>
+
