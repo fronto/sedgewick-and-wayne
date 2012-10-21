@@ -1,10 +1,14 @@
 package com.thomas.preparation.stack.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import com.thomas.preparation.stack.ArrayStack;
 import com.thomas.preparation.stack.Stack;
-import static org.junit.Assert.*;
+import com.thomas.preparation.stack.StackEmptyExcpetion;
 
 
 public class StackImplTests {
@@ -20,6 +24,13 @@ public class StackImplTests {
 		stack.push(5);
 		assertIntegersEqual(5, stack.pop());
 		
+	}
+	
+	
+	@Test(expected=StackEmptyExcpetion.class)
+	public void popThrowsExceptionWhenStackIsEmpty() {
+		Stack<Integer> stack = ArrayStack.newArrayStack(TEN, integers());
+		stack.pop();
 	}
 	
 	
@@ -47,7 +58,7 @@ public class StackImplTests {
 	}
 	
 	@Test
-	public void canQueryTop() {
+	public void topReturnsLastValuePushed() {
 
 		Stack<Integer> stack = ArrayStack.newArrayStack(TEN, integers());
 		stack.push(2);
@@ -57,22 +68,55 @@ public class StackImplTests {
 		
 	}
 	
+	
+	@Test(expected=StackEmptyExcpetion.class) 
+	public void topThrowsExceptionWhenStackIsEmpty() {
+		Stack<Integer> stack = ArrayStack.newArrayStack(TEN, integers());
+		stack.top();
+	}
+	
 	@Test
-	public void obtainsSizeCorrecty() {
-		
-		
-		
+	public void pushIncrementsSize() {
+		Stack<Integer> stack = ArrayStack.newArrayStack(TEN, integers());
+		stack.push(1);
+		stack.push(1);
+		assertIntegersEqual(stack.size(), 2);
+	}
+	
+	@Test
+	public void popDecrementsSize() {
+		Stack<Integer> stack = ArrayStack.newArrayStack(TEN, integers());
+		stack.push(1);
+		stack.push(1);
+		stack.pop();
+		assertIntegersEqual(stack.size(), 1);
 		
 	}
 	
 	
 	@Test
-	public void canQueryIsEmpty() {
-		
-		//returnsTrueOnEmtyStack();
-		//returnFalseOnStackWithElements();
+	public void isEmptyOnNewStack() {
+		Stack<Integer> stack = ArrayStack.newArrayStack(TEN, integers());
+		assertTrue(stack.isEmpty());
+	}
+	
+	
+	@Test
+	public void isEmptyAfterPushThenPop() {
+		Stack<Integer> stack = ArrayStack.newArrayStack(TEN, integers());
+		stack.push(2);
+		stack.pop();
+		assertTrue(stack.isEmpty());
+	}
+
+	@Test
+	public void notEmptyOnStackWithElements() {
+		Stack<Integer> stack = ArrayStack.newArrayStack(TEN, integers());
+		stack.push(1);
+		assertFalse(stack.isEmpty());
 		
 	}
+		
 	
 	
 }
