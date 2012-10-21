@@ -47,8 +47,9 @@
 	    	</classpath>
   	    <formatter type="plain"/>
 	    <batchtest todir="${test.results}">
-	 	<fileset dir="${test.classes}">
-			<include name="**/*Tests*"/>	
+	 	<fileset dir="${tests}">
+			<include name="**/*"/>	
+			<contains text="@Test"/>
 		</fileset>
 	    </batchtest>
 	
