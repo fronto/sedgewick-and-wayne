@@ -6,9 +6,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.thomas.preparation.stack.ArrayStack;
 import com.thomas.preparation.stack.Stack;
 import com.thomas.preparation.stack.StackEmptyExcpetion;
+import com.thomas.preparation.stack.array.ArrayStack;
 
 
 public class StackImplTests {

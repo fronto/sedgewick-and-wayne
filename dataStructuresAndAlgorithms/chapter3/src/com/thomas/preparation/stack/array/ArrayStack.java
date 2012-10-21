@@ -1,7 +1,9 @@
-package com.thomas.preparation.stack;
+package com.thomas.preparation.stack.array;
 
 import java.util.Arrays;
 
+import com.thomas.preparation.stack.Stack;
+import com.thomas.preparation.stack.StackEmptyExcpetion;
 
 public class ArrayStack<T> implements  Stack<T>{
 
