@@ -8,6 +8,7 @@
   <property name="build" location="build"/>
   <property name="main.classes" location="${build}/classes"/>
   <property name="test.classes" location="${build}/test-classes"/>
+  <property name="test.results" location="${build}/test-results"/>
   <property name="dist"  location="dist"/>
   <property name="lib"  location="lib"/>
 
@@ -37,19 +38,26 @@
 
 
     <target name="test" depends="compile-tests">
-	<junit printsummary="yes" fork="yes" haltonfailure="yes">
+	<mkdir dir="${test.results}" />
+	<junit printsummary="on" haltonfailure="yes">
 		<classpath>
 			<path refid="jars" />
 	 		<dirset dir="${main.classes}"/>
 	 		<dirset dir="${test.classes}"/>
 	    	</classpath>
-
-  		<formatter type="plain"/>
-	    <batchtest>
-	 	<fileset dir="${test.classes}"/>
+  	    <formatter type="plain"/>
+	    <batchtest todir="${test.results}">
+	 	<fileset dir="${test.classes}">
+			<include name="**/*Tests*"/>	
+		</fileset>
 	    </batchtest>
 	
 	</junit>
+    </target>
+
+    <target name="clean">
+	<delete dir="${build}"/> 
+	<delete dir="${lib}"/>
     </target>
 
   <target name="echoProperties">
