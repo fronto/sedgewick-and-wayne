@@ -1,12 +1,13 @@
 package com.thomas.preparation.stack.test;
 
+import static com.thomas.preparation.test.TestUtils.expectException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import com.thomas.preparation.stack.Stack;
 import com.thomas.preparation.stack.StackEmptyExcpetion;
+import com.thomas.preparation.test.TestUtils.ThrowsException;
 
 public class StackTester {
 
@@ -122,23 +123,6 @@ public class StackTester {
 
 	}
 
-	private static <E extends Exception> void expectException(
-			Class<E> exception, ThrowsException throwing) {
-		try {
-
-			throwing.throwExcpetion();
-			fail("expected exception not thrown");
-
-		} catch (Exception e) {
-			assertTrue(exception.isAssignableFrom(e.getClass()));
-		}
-
-	}
-
-	private static interface ThrowsException {
-
-		void throwExcpetion();
-	}
 
 	public void runStackTests() {
 	  popReturnsLastValuePushed(); 
