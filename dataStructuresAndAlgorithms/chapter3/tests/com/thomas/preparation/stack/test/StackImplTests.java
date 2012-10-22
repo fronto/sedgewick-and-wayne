@@ -35,7 +35,7 @@ public class StackImplTests {
 	
 	@Test
 	public void testLinkedStack() {
-		StackFactory<Integer> linkedStackFactiory = new StackFactory<Integer>() {
+		StackFactory<Integer> linkedStackFactory = new StackFactory<Integer>() {
 
 			@Override
 			public Stack<Integer> createStack() {
@@ -44,7 +44,7 @@ public class StackImplTests {
 			
 		};
 		
-		StackTester stackTester = new StackTester(linkedStackFactiory);
+		StackTester stackTester = new StackTester(linkedStackFactory);
 		stackTester.runStackTests();
 	}
 	
