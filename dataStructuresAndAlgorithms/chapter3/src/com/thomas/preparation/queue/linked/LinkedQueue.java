@@ -6,15 +6,17 @@ import com.thomas.preparation.queue.array.QueueEmptyException;
 
 public class LinkedQueue<T> implements Queue<T> {
 
-	private Node<T> front;
+	private Node<T> head;
+	private Node<T> tail;
 	private int size;
 
 	public static <T> Queue<T> newLinkedQueue(Class<T> aClass) {
-		return new LinkedQueue<T>(null, 0);
+		return new LinkedQueue<T>(null, null, 0);
 	}
-	
-	private LinkedQueue(Node<T> first, int size) {
-		this.front = first;
+
+	private LinkedQueue(Node<T> first, Node<T> tail, int size) {
+		this.head = first;
+		this.tail = tail;
 		this.size = size;
 	}
 
@@ -33,35 +35,36 @@ public class LinkedQueue<T> implements Queue<T> {
 		if (isEmpty()) {
 			throw new QueueEmptyException();
 		}
-		return front.getValue();
+		return head.getValue();
 	}
 
 	@Override
 	public void enqueue(T t) {
+		updateTail();
+		tail.setValue(t);
 		size++;
-		Node<T> last = front;
-		if (front == null) {
-			front = new Node<T>();
-			front.setValue(t);
+	}
+
+	private void updateTail() {
+		if (isEmpty()) {
+			head = new Node<T>();
+			tail = head;
 			return;
 		}
-		while (last.getNext() != null) {
-			last = last.getNext();
-		}
-		Node<T> temp = last;
-		last = new Node<T>();
-		last.setValue(t);
-		temp.setNext(last);
+		Node<T> temp = tail;
+		tail = new Node<T>();
+		temp.setNext(tail);
+
 	}
 
 	@Override
 	public T dequeue() {
-		if(isEmpty()) {
+		if (isEmpty()) {
 			throw new QueueEmptyException();
 		}
 		size--;
-		Node<T> temp = front;
-		front = front.getNext();
+		Node<T> temp = head;
+		head = head.getNext();
 		return temp.getValue();
 	}
 
