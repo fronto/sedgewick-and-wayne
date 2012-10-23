@@ -24,16 +24,18 @@ public class DoublyLinkedList<T> implements Deque<T> {
 	@Override
 	public void insertFirst(T t) {
 		// setup node
-		BiderectionalNode<T> node = new BiderectionalNode<T>();
-		node.setValue(t);
+		BiderectionalNode<T> first = new BiderectionalNode<T>();
+		first.setValue(t);
 
+		BiderectionalNode<T> second = header.getNext();
+		
 		// setup node's links
-		node.setNext(header.getNext());
-		node.setPrevious(header);
+		first.setNext(second);
+		first.setPrevious(header);
 
 		// header's old next's previous and then header's next
-		header.getNext().setPrevious(node);
-		header.setNext(node);
+		second.setPrevious(first);
+		header.setNext(first);
 
 		// update size
 		size++;
@@ -41,14 +43,18 @@ public class DoublyLinkedList<T> implements Deque<T> {
 
 	@Override
 	public void insertLast(T t) {
-		BiderectionalNode<T> node = new BiderectionalNode<T>();
-		node.setValue(t);
+		
+		BiderectionalNode<T> secondLast = trailer.getPrevious();
+		
+		BiderectionalNode<T> last = new BiderectionalNode<T>();
+		last.setValue(t);
 
-		node.setNext(trailer);
-		node.setPrevious(trailer.getPrevious());
+		
+		last.setNext(trailer);
+		last.setPrevious(secondLast);
 
-		trailer.getPrevious().setNext(node);
-		trailer.setPrevious(node);
+		secondLast.setNext(last);
+		trailer.setPrevious(last);
 
 		size++;
 
