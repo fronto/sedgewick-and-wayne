@@ -11,15 +11,21 @@ public class QueueClient {
 	}
 	
 	
-	void enqueue(Integer... ints) {
+	QueueClient enqueue(Integer... ints) {
 		for(int i : ints) {
 			queue.enqueue(i);
 		}
+		return this;
 	}
 	
 	
 	QueueClient dequeue(int expected) {
 		assertIntegersEqual(queue.dequeue(), expected);
+		return this;
+	}
+	
+	QueueClient hasSize(int size) {
+		assertIntegersEqual(queue.size(), size);
 		return this;
 	}
 	

@@ -7,30 +7,25 @@ import com.thomas.preparation.queue.array.QueueEmptyException;
 public class LinkedQueue<T> implements Queue<T> {
 
 	private Node<T> front;
+	private int size;
 
 	public static <T> Queue<T> newLinkedQueue(Class<T> aClass) {
-		return new LinkedQueue<T>(null);
+		return new LinkedQueue<T>(null, 0);
 	}
 	
-	private LinkedQueue(Node<T> first) {
+	private LinkedQueue(Node<T> first, int size) {
 		this.front = first;
+		this.size = size;
 	}
 
 	@Override
 	public int size() {
-		int count = 0;
-		Node<T> counter = front;
-		while (counter != null) {
-			counter = counter.getNext();
-			count++;
-		}
-		return count;
-
+		return size;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return front == null;
+		return size == 0;
 	}
 
 	@Override
@@ -43,6 +38,7 @@ public class LinkedQueue<T> implements Queue<T> {
 
 	@Override
 	public void enqueue(T t) {
+		size++;
 		Node<T> last = front;
 		if (front == null) {
 			front = new Node<T>();
@@ -63,6 +59,7 @@ public class LinkedQueue<T> implements Queue<T> {
 		if(isEmpty()) {
 			throw new QueueEmptyException();
 		}
+		size--;
 		Node<T> temp = front;
 		front = front.getNext();
 		return temp.getValue();

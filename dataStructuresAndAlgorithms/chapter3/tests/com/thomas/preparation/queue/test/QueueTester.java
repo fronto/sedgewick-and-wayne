@@ -3,8 +3,6 @@ package com.thomas.preparation.queue.test;
 import static com.thomas.preparation.test.TestUtils.assertIntegersEqual;
 import static com.thomas.preparation.test.TestUtils.expectException;
 
-import org.junit.Test;
-
 import com.thomas.preparation.queue.Queue;
 import com.thomas.preparation.queue.array.QueueEmptyException;
 import com.thomas.preparation.queue.array.QueueFullException;
@@ -81,23 +79,24 @@ public class QueueTester {
 	private void enqueueIncrementsSize() {
 
 		Queue<Integer> queue = queueFactory.createQueue();
-		queue.enqueue(1);
-		queue.enqueue(1);
-
-		assertIntegersEqual(queue.size(), 2);
-
+		QueueClient queueClient = new QueueClient(queue);
+		
+		queueClient.hasSize(0);
+		queueClient.enqueue(1).hasSize(1);
+		queueClient.enqueue(1).hasSize(2);
+		queueClient.enqueue(1).hasSize(3);
+		
 	}
 
 	private void dequeueDecrementsSize() {
 
 		Queue<Integer> queue = queueFactory.createQueue();
-
-		queue.enqueue(1);
-		queue.enqueue(1);
-
-		queue.dequeue();
-
-		assertIntegersEqual(queue.size(), 1);
+		QueueClient queueClient = new QueueClient(queue);
+		
+		queueClient.enqueue(1,1,1,1,1).hasSize(5);
+		queueClient.dequeue(1).hasSize(4);
+		queueClient.dequeue(1).hasSize(3);
+		queueClient.dequeue(1).hasSize(2);
 
 	}
 
