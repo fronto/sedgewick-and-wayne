@@ -89,13 +89,20 @@ public class DoublyLinkedList<T> implements Deque<T> {
 	}
 
 	@Override
-	public T first() {
+	public T first() throws DequeEmptyException {
+		if(isEmpty()) {
+			throw new DequeEmptyException();
+		}
 		BiderectionalNode<T> first = header.getNext();
 		return first.getValue();
+		
 	}
 
 	@Override
-	public T last() {
+	public T last() throws DequeEmptyException {
+		if(isEmpty()) {
+			throw new DequeEmptyException();
+		}
 		BiderectionalNode<T> last = trailer.getPrevious();
 		return last.getValue();
 	}

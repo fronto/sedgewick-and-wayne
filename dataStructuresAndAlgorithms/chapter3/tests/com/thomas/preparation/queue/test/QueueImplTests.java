@@ -2,6 +2,7 @@ package com.thomas.preparation.queue.test;
 
 import org.junit.Test;
 
+import com.thomas.preparation.queue.DequeQueueAdapter;
 import com.thomas.preparation.queue.Queue;
 import com.thomas.preparation.queue.array.ArrayQueue;
 import com.thomas.preparation.queue.linked.LinkedQueue;
@@ -24,7 +25,6 @@ public class QueueImplTests {
 		queueTester.runQueueTests();
 	}
 
-	
 	@Test
 	public void testLinkedQueue() {
 		QueueFactory<Integer> queueFactory = new QueueFactory<Integer>() {
@@ -37,7 +37,19 @@ public class QueueImplTests {
 
 		QueueTester queueTester = new QueueTester(queueFactory);
 		queueTester.runQueueTests();
-	}	
-	
-	
+	}
+
+	@Test
+	public void testDequeQueueAdapter() {
+		QueueFactory<Integer> queueFactory = new QueueFactory<Integer>() {
+
+			@Override
+			public Queue<Integer> createQueue() {
+				return DequeQueueAdapter.newDequeQueueAdapter(Integer.class);
+			}
+		};
+		QueueTester queueTester = new QueueTester(queueFactory);
+		queueTester.runQueueTests();
+	}
+
 }

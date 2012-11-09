@@ -5,7 +5,13 @@ import static com.thomas.preparation.test.TestUtils.assertIntegersEqual;
 import org.junit.Test;
 
 import com.thomas.preparation.deque.Deque;
+import com.thomas.preparation.deque.DequeEmptyException;
 import com.thomas.preparation.deque.DoublyLinkedList;
+import com.thomas.preparation.stack.StackEmptyExcpetion;
+
+import com.thomas.preparation.test.TestUtils.ThrowsException;
+
+import static com.thomas.preparation.test.TestUtils.expectException;
 
 public class DequeTest {
 
@@ -47,6 +53,62 @@ public class DequeTest {
 		assertIntegersEqual(deque.removeLast(), FIVE);
 		assertIntegersEqual(deque.size(), ONE);
 
+	}
+	
+	@Test
+	public void cannotQueryEmptyDeque() {
+		expectException(DequeEmptyException.class, queryingFirst());
+		expectException(DequeEmptyException.class, queryingLast());
+	}
+	
+	@Test
+	public void cannotRemoveFromEmptyDeque() {
+		expectException(DequeEmptyException.class, removingFirst());
+		expectException(DequeEmptyException.class, removingLast());
+	}
+
+	private ThrowsException removingLast() {
+		return new ThrowsException() {
+			
+			@Override
+			public void throwExcpetion() {
+				Deque<Integer> deque = DoublyLinkedList.newDoublyLinkedList(Integer.class);
+				deque.removeLast();
+			}
+		};
+	}
+
+	private ThrowsException removingFirst() {
+		return new ThrowsException() {
+			
+			@Override
+			public void throwExcpetion() {
+				Deque<Integer> deque = DoublyLinkedList.newDoublyLinkedList(Integer.class);
+				deque.removeFirst();
+			}
+		};
+	}
+
+	private ThrowsException queryingLast() {
+		return new ThrowsException() {
+			
+			@Override
+			public void throwExcpetion() {
+				Deque<Integer> deque = DoublyLinkedList.newDoublyLinkedList(Integer.class);
+				deque.last();
+			}
+		};
+	}
+
+	private ThrowsException queryingFirst() {
+		return new ThrowsException() {
+			
+			@Override
+			public void throwExcpetion() {
+				Deque<Integer> deque = DoublyLinkedList.newDoublyLinkedList(Integer.class);
+				deque.first();
+			}
+		};
 	}
 
 }

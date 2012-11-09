@@ -6,13 +6,13 @@ public interface Deque<T> {
 
 	void insertLast(T t);
 
-	T removeFirst();
+	T removeFirst() throws DequeEmptyException;
 
-	T removeLast();
+	T removeLast() throws DequeEmptyException;
 
-	T first();
+	T first() throws DequeEmptyException;
 
-	T last();
+	T last() throws DequeEmptyException;
 
 	int size();
 
