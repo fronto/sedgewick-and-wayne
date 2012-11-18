@@ -1,17 +1,14 @@
-package com.thomas.preparation;
+package com.thomas.preparation.deque.test;
 
 import static com.thomas.preparation.test.TestUtils.assertIntegersEqual;
+import static com.thomas.preparation.test.TestUtils.expectException;
 
 import org.junit.Test;
 
 import com.thomas.preparation.deque.Deque;
 import com.thomas.preparation.deque.DequeEmptyException;
 import com.thomas.preparation.deque.DoublyLinkedList;
-import com.thomas.preparation.stack.StackEmptyExcpetion;
-
 import com.thomas.preparation.test.TestUtils.ThrowsException;
-
-import static com.thomas.preparation.test.TestUtils.expectException;
 
 public class DequeTest {
 
