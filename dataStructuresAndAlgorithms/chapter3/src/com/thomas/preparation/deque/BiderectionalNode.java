@@ -1,6 +1,8 @@
 package com.thomas.preparation.deque;
 
-public class BiderectionalNode<T> {
+import com.thomas.preparation.list.Position;
+
+public class BiderectionalNode<T> implements Position<T, BiderectionalNode<T>> {
 
 	private BiderectionalNode<T> next;
 	private BiderectionalNode<T> previous;
@@ -31,6 +33,16 @@ public class BiderectionalNode<T> {
 
 	public void setValue(T value) {
 		this.value = value;
+	}
+
+	@Override
+	public T element() {
+		return getValue();
+	}
+
+	@Override
+	public BiderectionalNode<T> asImplementation() {
+		return this;
 	}
 	
 	
