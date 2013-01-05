@@ -122,25 +122,6 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 		return newNode;
 	}
 
-	// @Override
-	// public void insertFirst(T t) {
-	// // setup node
-	// BiderectionalNode<T> first = new BiderectionalNode<T>();
-	// first.setValue(t);
-	//
-	// BiderectionalNode<T> second = header.getNext();
-	//
-	// // setup node's links
-	// first.setNext(second);
-	// first.setPrevious(header);
-	//
-	// // header's old next's previous and then header's next
-	// second.setPrevious(first);
-	// header.setNext(first);
-	//
-	// // update size
-	// size++;
-	// }
 	@Override
 	public Position<T, BiderectionalNode<T>> insertFirst(Position<T, BiderectionalNode<T>> position, T element)
 			throws InvalidPositionException {
