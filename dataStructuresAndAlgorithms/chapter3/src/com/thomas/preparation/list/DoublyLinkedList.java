@@ -258,32 +258,12 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 
 	}
 
-	// @Override
-	// public T first() throws DequeEmptyException {
-	// if(isEmpty()) {
-	// throw new DequeEmptyException();
-	// }
-	// BiderectionalNode<T> first = header.getNext();
-	// return first.getValue();
-	//
-	// }
-
 	@Override
 	public Position<T, BiderectionalNode<T>> first() throws EmptyListException {
-		if (isEmpty()) {
-			throw new EmptyListException();
-		}
+		checkNotEmpty();
 		return header;
 	}
 
-	// @Override
-	// public T last() throws DequeEmptyException {
-	// if(isEmpty()) {
-	// throw new DequeEmptyException();
-	// }
-	// BiderectionalNode<T> last = trailer.getPrevious();
-	// return last.getValue();
-	// }
 
 	@Override
 	public Position<T, BiderectionalNode<T>> last() throws EmptyListException {
