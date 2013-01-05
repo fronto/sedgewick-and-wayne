@@ -47,18 +47,18 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 	}
 
 	@Override
-	public boolean isFirst(Position<T, BiderectionalNode<T>> position) throws InvalidPositionException {
+	public boolean isFirst(Position<T, BiderectionalNode<T>> position) throws InvalidPositionException, EmptyListException {
 		checkNotEmpty();
 		return position == header;
 	}
 
 	@Override
-	public boolean isLast(Position<T, BiderectionalNode<T>> position) throws InvalidPositionException {
+	public boolean isLast(Position<T, BiderectionalNode<T>> position) throws InvalidPositionException, EmptyListException {
 		checkNotEmpty();
 		return position == trailer;
 	}
 
-	private void checkNotEmpty() {
+	private void checkNotEmpty() throws EmptyListException {
 		if (isEmpty()) {
 			throw new EmptyListException();
 		}
@@ -287,6 +287,7 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 
 	@Override
 	public Position<T, BiderectionalNode<T>> last() throws EmptyListException {
+		checkNotEmpty();
 		return trailer;
 	}
 

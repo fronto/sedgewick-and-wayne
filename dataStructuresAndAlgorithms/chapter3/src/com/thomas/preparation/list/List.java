@@ -6,9 +6,9 @@ public interface List<E, P extends Position<E,P>> {
 
 	boolean isEmpty();
 
-	boolean isFirst(Position<E, P> position) throws InvalidPositionException;
+	boolean isFirst(Position<E, P> position) throws InvalidPositionException, EmptyListException;
 
-	boolean isLast(Position<E, P> position) throws InvalidPositionException;
+	boolean isLast(Position<E, P> position) throws InvalidPositionException, EmptyListException;
 
 	Position<E, P> first() throws EmptyListException;
 
