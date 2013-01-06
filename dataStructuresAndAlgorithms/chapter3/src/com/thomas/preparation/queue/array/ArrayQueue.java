@@ -40,7 +40,7 @@ public class ArrayQueue<T>  implements Queue<T>{
 	}
 
 	@Override
-	public T front() {
+	public T front() throws QueueEmptyException {
 		if(isEmpty()) {
 			throw new QueueEmptyException();
 		}
@@ -62,7 +62,7 @@ public class ArrayQueue<T>  implements Queue<T>{
 	}
 
 	@Override
-	public T dequeue() {
+	public T dequeue() throws QueueEmptyException {
 		if(isEmpty()) {
 			throw new QueueEmptyException();
 		}

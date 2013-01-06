@@ -18,7 +18,7 @@ public class QueueTester {
 		this.queueFactory = queueFactory;
 	}
 
-	private void firstElementEnqueuedIsAtFront() {
+	private void firstElementEnqueuedIsAtFront() throws QueueEmptyException {
 		Queue<Integer> queue = queueFactory.createQueue();
 		queue.enqueue(3);
 		queue.enqueue(4);
@@ -26,7 +26,7 @@ public class QueueTester {
 
 	}
 
-	private void firstElementEnqueuedIsFirstElementDequeued() {
+	private void firstElementEnqueuedIsFirstElementDequeued() throws QueueEmptyException {
 		Queue<Integer> queue = queueFactory.createQueue();
 		queue.enqueue(1);
 		queue.enqueue(2);
@@ -56,7 +56,7 @@ public class QueueTester {
 		expectException(QueueEmptyException.class, new ThrowsException() {
 
 			@Override
-			public void throwExcpetion() {
+			public void throwExcpetion() throws QueueEmptyException {
 				Queue<Integer> queue = queueFactory.createQueue();
 				queue.dequeue();
 
@@ -68,7 +68,7 @@ public class QueueTester {
 		expectException(QueueEmptyException.class, new ThrowsException() {
 
 			@Override
-			public void throwExcpetion() {
+			public void throwExcpetion() throws QueueEmptyException {
 				Queue<Integer> queue = queueFactory.createQueue();
 				queue.dequeue();
 
@@ -88,7 +88,7 @@ public class QueueTester {
 		
 	}
 
-	private void dequeueDecrementsSize() {
+	private void dequeueDecrementsSize() throws QueueEmptyException {
 
 		Queue<Integer> queue = queueFactory.createQueue();
 		QueueClient queueClient = new QueueClient(queue);
@@ -100,7 +100,7 @@ public class QueueTester {
 
 	}
 
-	private void queueWorksAfterBeingFulledThenDrained() {
+	private void queueWorksAfterBeingFulledThenDrained() throws QueueEmptyException {
 
 		Queue<Integer> queue = queueFactory.createQueue();
 		QueueClient queueClient = new QueueClient(queue);
@@ -123,6 +123,7 @@ public class QueueTester {
 	}
 
 	public void runQueueTests() {
+		try {
 		firstElementEnqueuedIsAtFront();
 		firstElementEnqueuedIsFirstElementDequeued();
 		//cannotEnqueueWhenQueueFull();
@@ -131,6 +132,9 @@ public class QueueTester {
 		enqueueIncrementsSize();
 		dequeueDecrementsSize();
 		queueWorksAfterBeingFulledThenDrained();
+		} catch(QueueEmptyException q) {
+			throw new RuntimeException(q);
+		}
 	}
 
 }

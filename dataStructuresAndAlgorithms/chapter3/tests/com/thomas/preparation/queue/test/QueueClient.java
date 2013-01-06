@@ -1,6 +1,8 @@
 package com.thomas.preparation.queue.test;
 
 import com.thomas.preparation.queue.Queue;
+import com.thomas.preparation.queue.array.QueueEmptyException;
+
 import static com.thomas.preparation.test.TestUtils.assertIntegersEqual;
 public class QueueClient {
 
@@ -19,7 +21,7 @@ public class QueueClient {
 	}
 	
 	
-	QueueClient dequeue(int expected) {
+	QueueClient dequeue(int expected) throws QueueEmptyException {
 		assertIntegersEqual(queue.dequeue(), expected);
 		return this;
 	}

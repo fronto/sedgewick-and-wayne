@@ -30,8 +30,12 @@ public class DequeQueueAdapter<T> implements Queue<T> {
 	}
 
 	@Override
-	public T front() {
-		return dequeDelegate.last();
+	public T front() throws QueueEmptyException {
+		try {
+			return dequeDelegate.last();
+		} catch (DequeEmptyException e) {
+			throw new QueueEmptyException();
+		}
 	}
 
 	@Override
@@ -40,7 +44,7 @@ public class DequeQueueAdapter<T> implements Queue<T> {
 	}
 
 	@Override
-	public T dequeue() {
+	public T dequeue() throws QueueEmptyException {
 		try {
 		return dequeDelegate.removeLast();
 		} catch(DequeEmptyException empty) {

@@ -18,21 +18,21 @@ public class DequeTester {
 		this.dequeFactory = dequeFactory;
 	}
 	
-	private void canAppendToFrontOfDeque() {
+	private void canAppendToFrontOfDeque() throws DequeEmptyException {
 		Deque<Integer> deque = dequeFactory.createDeque();
 		deque.insertFirst(ONE);
 		deque.insertFirst(FIVE);
 		assertIntegersEqual(deque.first(), FIVE);
 	}
 
-	private void canAppendToEndOFDeque() {
+	private void canAppendToEndOFDeque() throws DequeEmptyException {
 		Deque<Integer> deque = dequeFactory.createDeque();
 		deque.insertLast(ONE);
 		deque.insertLast(FIVE);
 		assertIntegersEqual(deque.last(), FIVE);
 	}
 
-	private void canRemoveFirst() {
+	private void canRemoveFirst() throws DequeEmptyException {
 		Deque<Integer> deque = dequeFactory.createDeque();
 		deque.insertFirst(ONE);
 		deque.insertFirst(FIVE);
@@ -41,7 +41,7 @@ public class DequeTester {
 		assertIntegersEqual(deque.size(), ONE);
 	}
 
-	private void canRemoveLast() {
+	private void canRemoveLast() throws DequeEmptyException {
 		Deque<Integer> deque = dequeFactory.createDeque();
 		deque.insertLast(ONE);
 		deque.insertLast(FIVE);
@@ -65,7 +65,7 @@ public class DequeTester {
 		return new ThrowsException() {
 
 			@Override
-			public void throwExcpetion() {
+			public void throwExcpetion() throws DequeEmptyException {
 				Deque<Integer> deque = dequeFactory.createDeque();
 				deque.removeLast();
 			}
@@ -76,7 +76,7 @@ public class DequeTester {
 		return new ThrowsException() {
 
 			@Override
-			public void throwExcpetion() {
+			public void throwExcpetion() throws DequeEmptyException {
 				Deque<Integer> deque = dequeFactory.createDeque();
 				deque.removeFirst();
 			}
@@ -87,7 +87,7 @@ public class DequeTester {
 		return new ThrowsException() {
 
 			@Override
-			public void throwExcpetion() {
+			public void throwExcpetion() throws DequeEmptyException {
 				Deque<Integer> deque = dequeFactory.createDeque();
 				deque.last();
 			}
@@ -98,7 +98,7 @@ public class DequeTester {
 		return new ThrowsException() {
 
 			@Override
-			public void throwExcpetion() {
+			public void throwExcpetion() throws DequeEmptyException {
 				Deque<Integer> deque = dequeFactory.createDeque();
 				deque.first();
 			}
@@ -106,12 +106,16 @@ public class DequeTester {
 	}
 
 	void runTests() {
+		try {
 		canAppendToFrontOfDeque();
 		canAppendToEndOFDeque();
 		canRemoveFirst();
 		canRemoveLast();
 		cannotQueryEmptyDeque();
 		cannotRemoveFromEmptyDeque();
+		} catch(DequeEmptyException d) {
+			throw new RuntimeException(d);
+		}
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.thomas.preparation.queue;
 
+import com.thomas.preparation.queue.array.QueueEmptyException;
+
 public interface Queue<T> {
 
 	
@@ -7,10 +9,10 @@ public interface Queue<T> {
 	
 	boolean isEmpty();
 	
-	T front();
+	T front() throws QueueEmptyException;
 	
 	void enqueue(T t);
 	
-	T dequeue();
+	T dequeue() throws QueueEmptyException;
 	
 }

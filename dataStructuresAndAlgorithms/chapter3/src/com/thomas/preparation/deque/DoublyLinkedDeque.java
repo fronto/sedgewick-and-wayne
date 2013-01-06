@@ -61,7 +61,7 @@ public class DoublyLinkedDeque<T> implements Deque<T> {
 	}
 
 	@Override
-	public T removeFirst() {
+	public T removeFirst() throws DequeEmptyException {
 		if (isEmpty()) {
 			throw new DequeEmptyException();
 		}
@@ -75,7 +75,7 @@ public class DoublyLinkedDeque<T> implements Deque<T> {
 	}
 
 	@Override
-	public T removeLast() {
+	public T removeLast() throws DequeEmptyException {
 		if (isEmpty()) {
 			throw new DequeEmptyException();
 		}

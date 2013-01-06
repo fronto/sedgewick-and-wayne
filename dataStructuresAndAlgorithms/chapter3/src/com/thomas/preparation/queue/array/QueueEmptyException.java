@@ -1,6 +1,7 @@
 package com.thomas.preparation.queue.array;
 
-public class QueueEmptyException extends RuntimeException {
+@SuppressWarnings("serial")
+public class QueueEmptyException extends Exception {
 
 	public QueueEmptyException() {
 		super("cannot remove elements from empty queue");
