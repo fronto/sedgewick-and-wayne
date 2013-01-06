@@ -20,7 +20,7 @@ public class VectorTest {
 	}
 
 	@Test
-	public void removeFromRankDecreasesSize() {
+	public void removeFromRankDecreasesSize() throws VectorEmptyException {
 
 		VectorClient<Integer> vectorClient = newVector().insertAtRank(0, 5).sizeIs(1);
 		vectorClient.removeAtRank(0).sizeIs(0);
@@ -28,7 +28,7 @@ public class VectorTest {
 	}
 
 	@Test
-	public void emptyWhenSizeIsZero() {
+	public void emptyWhenSizeIsZero() throws VectorEmptyException {
 
 		VectorClient<Integer> vectorClient = newVector().sizeIs(0).isEmpty();
 		vectorClient.insertAtRank(0, 4).sizeIsNot(0).isNotEmpty();
@@ -37,7 +37,7 @@ public class VectorTest {
 	}
 
 	@Test(expected = VectorEmptyException.class)
-	public void cannotRemoveFromEmptyVector() {
+	public void cannotRemoveFromEmptyVector() throws VectorEmptyException {
 
 		VectorClient<Integer> vectorClient = newVector().sizeIs(0);
 		vectorClient.removeAtRank(0);
@@ -45,7 +45,7 @@ public class VectorTest {
 	}
 
 	@Test(expected = VectorEmptyException.class)
-	public void cannotReplaceElementsInEmptyVector() {
+	public void cannotReplaceElementsInEmptyVector() throws VectorEmptyException {
 
 		VectorClient<Integer> vectorClient = newVector().sizeIs(0);
 		vectorClient.replaceAtRank(0, 4);
@@ -53,7 +53,7 @@ public class VectorTest {
 	}
 
 	@Test
-	public void replacingElementDoesNotChangeSize() {
+	public void replacingElementDoesNotChangeSize() throws VectorEmptyException {
 
 		VectorClient<Integer> vectorClient = newVector().insertAtRank(0, 2).sizeIs(1);
 		vectorClient.replaceAtRank(0, 4).sizeIs(1);
@@ -61,7 +61,7 @@ public class VectorTest {
 	}
 
 	@Test
-	public void insertAtRanksRightShiftsElementsAfterInsert() {
+	public void insertAtRanksRightShiftsElementsAfterInsert() throws VectorEmptyException {
 
 		VectorClient<Integer> vectorClient = newVector().insertAtRank(0, 51487).elementAtRank(0, 51487);
 		vectorClient.insertAtRank(0, 2).elementAtRank(1, 51487);
@@ -69,7 +69,7 @@ public class VectorTest {
 	}
 
 	@Test
-	public void removeAtRankLeftShiftsElemmentsAfterInsert() {
+	public void removeAtRankLeftShiftsElemmentsAfterInsert() throws VectorEmptyException {
 
 		VectorClient<Integer> vectorClient = newVector().insertAtRank(0, 0).elementAtRank(0, 0).insertAtRank(1, 1)
 				.elementAtRank(1, 1);
@@ -78,7 +78,7 @@ public class VectorTest {
 	}
 
 	@Test(expected = RuntimeException.class)
-	public void cannotRemoveElementGreaterThanSize() {
+	public void cannotRemoveElementGreaterThanSize() throws VectorEmptyException {
 
 		VectorClient<Integer> vectorClient = newVector().insertAtRank(0, 0).sizeIs(1);
 		vectorClient.removeAtRank(1);
@@ -86,7 +86,7 @@ public class VectorTest {
 	}
 
 	@Test(expected = RankOutOfRangeException.class)
-	public void cannotRetrieveElementGreaterOrEqualToSize() {
+	public void cannotRetrieveElementGreaterOrEqualToSize() throws VectorEmptyException {
 
 		VectorClient<Integer> vectorClient = newVector().insertAtRank(0, 0).sizeIs(1);
 		vectorClient.elementAtRank(1, 1);
@@ -109,7 +109,7 @@ public class VectorTest {
 	}
 
 	@Test
-	public void canRetireveElementAtRank() {
+	public void canRetireveElementAtRank() throws VectorEmptyException {
 
 		VectorClient<Integer> vectorClient = newVector();
 		vectorClient.insertAtRank(0, 5).elementAtRank(0, is(5));
@@ -122,7 +122,7 @@ public class VectorTest {
 	}
 
 	@Test
-	public void canReplaceAtRank() {
+	public void canReplaceAtRank() throws VectorEmptyException {
 
 		VectorClient<Integer> vectorClient = newVector();
 		vectorClient.insertAtRank(0, 5);
@@ -145,7 +145,7 @@ public class VectorTest {
 		return new VectorCallback<Integer>() {
 
 			@Override
-			public Integer onVector(Vector<Integer> vector) {
+			public Integer onVector(Vector<Integer> vector) throws VectorEmptyException {
 				return vector.replaceAtRank(rank, t);
 			}
 		};

@@ -46,7 +46,7 @@ public class ExtensibleArrayVector<T> implements Vector<T> {
 	}
 
 	@Override
-	public T elementAtRank(int rank) {
+	public T elementAtRank(int rank) throws VectorEmptyException {
 		if(isEmpty()) {
 			throw new VectorEmptyException();
 		}
@@ -58,7 +58,7 @@ public class ExtensibleArrayVector<T> implements Vector<T> {
 	}
 
 	@Override
-	public T replaceAtRank(int rank, T t) {
+	public T replaceAtRank(int rank, T t) throws VectorEmptyException {
 		if(isEmpty()) {
 			throw new VectorEmptyException();
 		}
@@ -89,7 +89,7 @@ public class ExtensibleArrayVector<T> implements Vector<T> {
 	}
 
 	@Override
-	public T removeAtRank(int rank) {
+	public T removeAtRank(int rank) throws VectorEmptyException {
 
 		if(isEmpty()) {
 			throw new VectorEmptyException();
