@@ -22,20 +22,6 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 		this.size = size;
 	}
 
-	// @Override
-	// public T removeLast() {
-	// if (isEmpty()) {
-	// throw new DequeEmptyException();
-	// }
-	//
-	// size--;
-	//
-	// BiderectionalNode<T> toRemove = trailer.getPrevious();
-	// toRemove.getPrevious().setNext(trailer);
-	// trailer.setPrevious(toRemove.getPrevious());
-	// return toRemove.getValue();
-	// }
-
 	@Override
 	public int size() {
 		return size;
@@ -165,6 +151,8 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 		positionNode.setPrevious(trailer);
 		trailer = positionNode;
 
+		size++;
+		
 		return trailer;
 	}
 
