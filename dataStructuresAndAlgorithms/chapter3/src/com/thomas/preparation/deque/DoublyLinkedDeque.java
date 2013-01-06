@@ -1,20 +1,20 @@
 package com.thomas.preparation.deque;
 
-public class DoublyLinkedList<T> implements Deque<T> {
+public class DoublyLinkedDeque<T> implements Deque<T> {
 
 	private BiderectionalNode<T> header;
 	private BiderectionalNode<T> trailer;
 	private int size;
 
-	public static <T> DoublyLinkedList<T> newDoublyLinkedList(Class<T> aClass) {
+	public static <T> DoublyLinkedDeque<T> newDoublyLinkedDeque(Class<T> aClass) {
 		BiderectionalNode<T> header = new BiderectionalNode<T>();
 		BiderectionalNode<T> trailer = new BiderectionalNode<T>();
 		header.setNext(trailer);
 		trailer.setPrevious(header);
-		return new DoublyLinkedList<T>(header, trailer, 0);
+		return new DoublyLinkedDeque<T>(header, trailer, 0);
 	}
 
-	private DoublyLinkedList(BiderectionalNode<T> header,
+	private DoublyLinkedDeque(BiderectionalNode<T> header,
 			BiderectionalNode<T> trailer, int size) {
 		this.header = header;
 		this.trailer = trailer;

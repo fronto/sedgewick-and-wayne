@@ -3,7 +3,7 @@ package com.thomas.preparation.deque.test;
 import org.junit.Test;
 
 import com.thomas.preparation.deque.Deque;
-import com.thomas.preparation.deque.DoublyLinkedList;
+import com.thomas.preparation.deque.DoublyLinkedDeque;
 import com.thomas.preparation.deque.VectorDeque;
 import com.thomas.preparation.vector.ExtensibleArrayVector;
 import com.thomas.preparation.vector.Vector;
@@ -17,7 +17,7 @@ public class DequeTests {
 
 			@Override
 			public Deque<Integer> createDeque() {
-				return DoublyLinkedList.newDoublyLinkedList(Integer.class);
+				return DoublyLinkedDeque.newDoublyLinkedDeque(Integer.class);
 			}
 		});
 	}

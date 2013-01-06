@@ -2,12 +2,12 @@ package com.thomas.preparation.stack;
 
 import com.thomas.preparation.deque.Deque;
 import com.thomas.preparation.deque.DequeEmptyException;
-import com.thomas.preparation.deque.DoublyLinkedList;
+import com.thomas.preparation.deque.DoublyLinkedDeque;
 
 public class DequeStackAdapter<T> implements Stack<T> {
 
 	public static <T> Stack<T> newDequeStackAdapter(Class<T> type) {
-		Deque<T> deque = DoublyLinkedList.newDoublyLinkedList(type);
+		Deque<T> deque = DoublyLinkedDeque.newDoublyLinkedDeque(type);
 		return new DequeStackAdapter<T>(deque);
 	}
 	

@@ -2,13 +2,13 @@ package com.thomas.preparation.queue;
 
 import com.thomas.preparation.deque.Deque;
 import com.thomas.preparation.deque.DequeEmptyException;
-import com.thomas.preparation.deque.DoublyLinkedList;
+import com.thomas.preparation.deque.DoublyLinkedDeque;
 import com.thomas.preparation.queue.array.QueueEmptyException;
 
 public class DequeQueueAdapter<T> implements Queue<T> {
 
 	public static <T> Queue<T> newDequeQueueAdapter(Class<T> type) {
-		Deque<T> deque = DoublyLinkedList.newDoublyLinkedList(type);
+		Deque<T> deque = DoublyLinkedDeque.newDoublyLinkedDeque(type);
 		return new DequeQueueAdapter<T>(deque);
 	}
 	
