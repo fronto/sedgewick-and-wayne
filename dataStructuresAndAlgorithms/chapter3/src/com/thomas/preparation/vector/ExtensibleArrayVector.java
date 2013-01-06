@@ -96,7 +96,7 @@ public class ExtensibleArrayVector<T> implements Vector<T> {
 		}
 		
 		if (rank >= size) {
-			throw new RuntimeException("invalid rank");
+			throw new RankOutOfRangeException();
 		}
 		
 		T temp = array[rank];
