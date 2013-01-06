@@ -77,7 +77,7 @@ public class VectorTest {
 
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test(expected = RankOutOfRangeException.class)
 	public void cannotRemoveElementGreaterThanSize() throws VectorEmptyException {
 
 		VectorClient<Integer> vectorClient = newVector().insertAtRank(0, 0).sizeIs(1);
