@@ -11,14 +11,13 @@ import com.thomas.preparation.test.TestUtils.ThrowsException;
 
 public class StackTester {
 
-	
 	private final StackFactory<Integer> stackFactory;
 
 	public StackTester(StackFactory<Integer> stackFactory) {
 		this.stackFactory = stackFactory;
 	}
-	
-	private void popReturnsLastValuePushed() {
+
+	private void popReturnsLastValuePushed() throws StackEmptyExcpetion {
 
 		Stack<Integer> stack = stackFactory.createStack();
 		stack.push(2);
@@ -27,13 +26,12 @@ public class StackTester {
 
 	}
 
-	
 	private void popThrowsExceptionWhenStackIsEmpty() {
 
 		expectException(StackEmptyExcpetion.class, new ThrowsException() {
 
 			@Override
-			public void throwExcpetion() {
+			public void throwExcpetion() throws StackEmptyExcpetion {
 
 				Stack<Integer> stack = stackFactory.createStack();
 				stack.pop();
@@ -47,10 +45,7 @@ public class StackTester {
 		assertEquals(Integer.valueOf(actual), Integer.valueOf(expected));
 	}
 
-	
-
-	
-	private void lastPushedIsTopOfStack() {
+	private void lastPushedIsTopOfStack() throws StackEmptyExcpetion {
 
 		Stack<Integer> stack = stackFactory.createStack();
 		stack.push(2);
@@ -60,8 +55,7 @@ public class StackTester {
 
 	}
 
-	
-	private void topReturnsLastValuePushed() {
+	private void topReturnsLastValuePushed() throws StackEmptyExcpetion {
 
 		Stack<Integer> stack = stackFactory.createStack();
 		stack.push(2);
@@ -70,12 +64,11 @@ public class StackTester {
 
 	}
 
-	
 	private void topThrowsExceptionWhenStackIsEmpty() {
 		expectException(StackEmptyExcpetion.class, new ThrowsException() {
 
 			@Override
-			public void throwExcpetion() {
+			public void throwExcpetion() throws StackEmptyExcpetion {
 				Stack<Integer> stack = stackFactory.createStack();
 				stack.top();
 			}
@@ -83,7 +76,6 @@ public class StackTester {
 
 	}
 
-	
 	private void pushIncrementsSize() {
 		Stack<Integer> stack = stackFactory.createStack();
 		stack.push(1);
@@ -91,8 +83,7 @@ public class StackTester {
 		assertIntegersEqual(stack.size(), 2);
 	}
 
-	
-	private void popDecrementsSize() {
+	private void popDecrementsSize() throws StackEmptyExcpetion {
 		Stack<Integer> stack = stackFactory.createStack();
 		stack.push(1);
 		stack.push(1);
@@ -101,21 +92,18 @@ public class StackTester {
 
 	}
 
-	
 	private void isEmptyOnNewStack() {
 		Stack<Integer> stack = stackFactory.createStack();
 		assertTrue(stack.isEmpty());
 	}
 
-	
-	private void isEmptyAfterPushThenPop() {
+	private void isEmptyAfterPushThenPop() throws StackEmptyExcpetion {
 		Stack<Integer> stack = stackFactory.createStack();
 		stack.push(2);
 		stack.pop();
 		assertTrue(stack.isEmpty());
 	}
 
-	
 	private void notEmptyOnStackWithElements() {
 		Stack<Integer> stack = stackFactory.createStack();
 		stack.push(1);
@@ -123,18 +111,20 @@ public class StackTester {
 
 	}
 
-
 	public void runStackTests() {
-	  popReturnsLastValuePushed(); 
-	  popThrowsExceptionWhenStackIsEmpty(); 
-	  lastPushedIsTopOfStack(); 
-	  topReturnsLastValuePushed(); 
-	  topThrowsExceptionWhenStackIsEmpty(); 
-	  pushIncrementsSize(); 
-	  popDecrementsSize(); 
-	  isEmptyOnNewStack(); 
-	  isEmptyAfterPushThenPop(); 
-	  notEmptyOnStackWithElements(); 
+		try {
+			popReturnsLastValuePushed();
+			popThrowsExceptionWhenStackIsEmpty();
+			lastPushedIsTopOfStack();
+			topReturnsLastValuePushed();
+			topThrowsExceptionWhenStackIsEmpty();
+			pushIncrementsSize();
+			popDecrementsSize();
+			isEmptyOnNewStack();
+			isEmptyAfterPushThenPop();
+			notEmptyOnStackWithElements();
+		} catch (StackEmptyExcpetion s) {
+			throw new RuntimeException(s);
+		}
 	}
 }
-
