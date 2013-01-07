@@ -14,9 +14,9 @@ public interface List<E> {
 
 	Position<E> last() throws EmptyListException;
 
-	Position<E> before(Position<E> position) throws InvalidPositionException, BoundaryViolationException;
+	Position<E> before(Position<E> position) throws InvalidPositionException, BoundaryViolationException, EmptyListException;
 
-	Position<E> after(Position<E> position) throws InvalidPositionException, BoundaryViolationException;
+	Position<E> after(Position<E> position) throws InvalidPositionException, BoundaryViolationException, EmptyListException;
 
 	Position<E> insertBefore(Position<E> position, E element) throws InvalidPositionException;
 
@@ -26,7 +26,7 @@ public interface List<E> {
 
 	Position<E> insertLast(E element) throws InvalidPositionException;
 
-	E remove(Position<E> position) throws InvalidPositionException;
+	E remove(Position<E> position) throws InvalidPositionException, EmptyListException;
 
 	E replaceElement(Position<E> position, E element) throws InvalidPositionException;
 

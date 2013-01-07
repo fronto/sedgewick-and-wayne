@@ -52,8 +52,9 @@ public class DoublyLinkedList<T> implements List<T> {
 
 	@Override
 	public Position<T> before(Position<T> position)
-			throws InvalidPositionException, BoundaryViolationException {
+			throws InvalidPositionException, BoundaryViolationException, EmptyListException {
 		BiderectionalNode<T> positionNode = asNode(position);
+		checkNotEmpty();
 		if (positionNode == header) {
 			throw new BoundaryViolationException();
 		}
@@ -67,8 +68,9 @@ public class DoublyLinkedList<T> implements List<T> {
 
 	@Override
 	public Position<T> after(Position<T> position)
-			throws InvalidPositionException, BoundaryViolationException {
+			throws InvalidPositionException, BoundaryViolationException, EmptyListException {
 		BiderectionalNode<T> positionNode = asNode(position);
+		checkNotEmpty();
 		if (position == trailer) {
 			throw new BoundaryViolationException();
 		}
@@ -168,7 +170,8 @@ public class DoublyLinkedList<T> implements List<T> {
 	}
 
 	@Override
-	public T remove(Position<T> position) throws InvalidPositionException {
+	public T remove(Position<T> position) throws InvalidPositionException, EmptyListException {
+		checkNotEmpty();
 		BiderectionalNode<T> positionNode = asNode(position);
 		checkContainsReference(positionNode);
 		BiderectionalNode<T> previous = positionNode.getPrevious();
