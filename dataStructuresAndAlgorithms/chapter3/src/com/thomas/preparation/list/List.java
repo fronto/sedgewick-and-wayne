@@ -1,6 +1,6 @@
 package com.thomas.preparation.list;
 
-public interface List<E, P extends Position<E>> {
+public interface List<E> {
 
 	int size();
 
