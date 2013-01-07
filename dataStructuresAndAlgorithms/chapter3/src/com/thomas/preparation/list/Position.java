@@ -1,9 +1,9 @@
 package com.thomas.preparation.list;
 
-public interface Position<E, P extends Position<E, P>> {
+public interface Position<E> {
 
 	E element();
 	
-	P asImplementation();
+	<P extends Position<E>> P asImplementation(Class<P> implementationClass);
 	
 }

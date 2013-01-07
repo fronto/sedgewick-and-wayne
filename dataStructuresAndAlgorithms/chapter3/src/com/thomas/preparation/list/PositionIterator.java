@@ -1,9 +1,9 @@
 package com.thomas.preparation.list;
 
-public interface PositionIterator<T, P extends Position<T, P>> {
+public interface PositionIterator<T, P extends Position<T>> {
 
 	boolean hasNextPosition();
 	
-	Position<T, P> getNextPosition();
+	P getNextPosition();
 	
 }

@@ -2,12 +2,12 @@ package com.thomas.preparation.deque;
 
 import com.thomas.preparation.list.Position;
 
-public class BiderectionalNode<T> implements Position<T, BiderectionalNode<T>> {
+public class BiderectionalNode<T> implements Position<T> {
 
 	private BiderectionalNode<T> next;
 	private BiderectionalNode<T> previous;
 	private T value;
-	
+
 	public BiderectionalNode() {
 	}
 
@@ -40,10 +40,10 @@ public class BiderectionalNode<T> implements Position<T, BiderectionalNode<T>> {
 		return getValue();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public BiderectionalNode<T> asImplementation() {
-		return this;
+	public <P extends Position<T>> P asImplementation(Class<P> implementationClass) {
+		return (P) this;
 	}
-	
-	
+
 }

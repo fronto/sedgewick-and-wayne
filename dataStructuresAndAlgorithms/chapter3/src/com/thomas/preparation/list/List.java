@@ -1,34 +1,34 @@
 package com.thomas.preparation.list;
 
-public interface List<E, P extends Position<E,P>> {
+public interface List<E, P extends Position<E>> {
 
 	int size();
 
 	boolean isEmpty();
 
-	boolean isFirst(Position<E, P> position) throws InvalidPositionException, EmptyListException;
+	boolean isFirst(Position<E> position) throws InvalidPositionException, EmptyListException;
 
-	boolean isLast(Position<E, P> position) throws InvalidPositionException, EmptyListException;
+	boolean isLast(Position<E> position) throws InvalidPositionException, EmptyListException;
 
-	Position<E, P> first() throws EmptyListException;
+	Position<E> first() throws EmptyListException;
 
-	Position<E, P> last() throws EmptyListException;
+	Position<E> last() throws EmptyListException;
 
-	Position<E, P> before(Position<E, P> position) throws InvalidPositionException, BoundaryViolationException;
+	Position<E> before(Position<E> position) throws InvalidPositionException, BoundaryViolationException;
 
-	Position<E, P> after(Position<E, P> position) throws InvalidPositionException, BoundaryViolationException;
+	Position<E> after(Position<E> position) throws InvalidPositionException, BoundaryViolationException;
 
-	Position<E, P> insertBefore(Position<E, P> position, E element) throws InvalidPositionException;
+	Position<E> insertBefore(Position<E> position, E element) throws InvalidPositionException;
 
-	Position<E, P> insertAfter(Position<E, P> position, E element) throws InvalidPositionException;
+	Position<E> insertAfter(Position<E> position, E element) throws InvalidPositionException;
 
-	Position<E, P> insertFirst(Position<E, P> position, E element) throws InvalidPositionException;
+	Position<E> insertFirst(Position<E> position, E element) throws InvalidPositionException;
 
-	Position<E, P> insertLast(Position<E, P> positon, E element) throws InvalidPositionException;
+	Position<E> insertLast(Position<E> positon, E element) throws InvalidPositionException;
 
-	E remove(Position<E, P> position) throws InvalidPositionException;
+	E remove(Position<E> position) throws InvalidPositionException;
 
-	E replaceElement(Position<E, P> position, E element) throws InvalidPositionException;
+	E replaceElement(Position<E> position, E element) throws InvalidPositionException;
 
-	void swapElements(Position<E, P> positionA, Position<E, P> positionB) throws InvalidPositionException;
+	void swapElements(Position<E> positionA, Position<E> positionB) throws InvalidPositionException;
 }

@@ -33,13 +33,13 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 	}
 
 	@Override
-	public boolean isFirst(Position<T, BiderectionalNode<T>> position) throws InvalidPositionException, EmptyListException {
+	public boolean isFirst(Position<T> position) throws InvalidPositionException, EmptyListException {
 		checkNotEmpty();
 		return position == header;
 	}
 
 	@Override
-	public boolean isLast(Position<T, BiderectionalNode<T>> position) throws InvalidPositionException, EmptyListException {
+	public boolean isLast(Position<T> position) throws InvalidPositionException, EmptyListException {
 		checkNotEmpty();
 		return position == trailer;
 	}
@@ -51,37 +51,37 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 	}
 
 	@Override
-	public Position<T, BiderectionalNode<T>> before(Position<T, BiderectionalNode<T>> position)
+	public Position<T> before(Position<T> position)
 			throws InvalidPositionException, BoundaryViolationException {
 		if (position == header) {
 			throw new BoundaryViolationException();
 		}
-		return position.asImplementation().getPrevious();
+		return position.asImplementation(BiderectionalNode.class).getPrevious();
 	}
 
 	@Override
-	public Position<T, BiderectionalNode<T>> after(Position<T, BiderectionalNode<T>> position)
+	public Position<T> after(Position<T> position)
 			throws InvalidPositionException, BoundaryViolationException {
 		if (position == trailer) {
 			throw new BoundaryViolationException();
 		}
 
-		return position.asImplementation().getNext();
+		return position.asImplementation(BiderectionalNode.class).getNext();
 	}
 
 	@Override
-	public Position<T, BiderectionalNode<T>> insertBefore(Position<T, BiderectionalNode<T>> position, T element)
+	public Position<T> insertBefore(Position<T> position, T element)
 			throws InvalidPositionException {
 
 		BiderectionalNode<T> newNode = new BiderectionalNode<T>();
 		newNode.setValue(element);
 
-		BiderectionalNode<T> prev = position.asImplementation().getPrevious();
+		BiderectionalNode<T> prev = position.asImplementation(BiderectionalNode.class).getPrevious();
 		prev.setNext(newNode);
 		newNode.setPrevious(prev);
 
-		newNode.setNext(position.asImplementation());
-		position.asImplementation().setPrevious(newNode);
+		newNode.setNext(position.asImplementation(BiderectionalNode.class));
+		position.asImplementation(BiderectionalNode.class).setPrevious(newNode);
 
 		size++;
 
@@ -90,18 +90,18 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 	}
 
 	@Override
-	public Position<T, BiderectionalNode<T>> insertAfter(Position<T, BiderectionalNode<T>> position, T element)
+	public Position<T> insertAfter(Position<T> position, T element)
 			throws InvalidPositionException {
 
 		BiderectionalNode<T> newNode = new BiderectionalNode<T>();
 		newNode.setValue(element);
 
-		BiderectionalNode<T> next = position.asImplementation().getNext();
+		BiderectionalNode<T> next = position.asImplementation(BiderectionalNode.class).getNext();
 		newNode.setNext(next);
 		next.setPrevious(newNode);
 
-		position.asImplementation().setNext(newNode);
-		newNode.setPrevious(position.asImplementation());
+		position.asImplementation(BiderectionalNode.class).setNext(newNode);
+		newNode.setPrevious(position.asImplementation(BiderectionalNode.class));
 
 		size++;
 
@@ -109,7 +109,7 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 	}
 
 	@Override
-	public Position<T, BiderectionalNode<T>> insertFirst(Position<T, BiderectionalNode<T>> position, T element)
+	public Position<T> insertFirst(Position<T> position, T element)
 			throws InvalidPositionException {
 
 		BiderectionalNode<T> newHeader = new BiderectionalNode<T>();
@@ -143,10 +143,10 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 	// }
 
 	@Override
-	public Position<T, BiderectionalNode<T>> insertLast(Position<T, BiderectionalNode<T>> positon, T element)
+	public Position<T> insertLast(Position<T> positon, T element)
 			throws InvalidPositionException {
 
-		BiderectionalNode<T> positionNode = positon.asImplementation();
+		BiderectionalNode<T> positionNode = positon.asImplementation(BiderectionalNode.class);
 		trailer.setNext(positionNode);
 		positionNode.setPrevious(trailer);
 		trailer = positionNode;
@@ -157,8 +157,8 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 	}
 
 	@Override
-	public T remove(Position<T, BiderectionalNode<T>> position) throws InvalidPositionException {
-		BiderectionalNode<T> positionNode = position.asImplementation();
+	public T remove(Position<T> position) throws InvalidPositionException {
+		BiderectionalNode<T> positionNode = position.asImplementation(BiderectionalNode.class);
 		checkContainsReference(positionNode);
 		BiderectionalNode<T> previous = positionNode.getPrevious();
 		BiderectionalNode<T> next = positionNode.getNext();
@@ -173,13 +173,13 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 
 	}
 
-	private void checkDoesNotCountain(Position<T, BiderectionalNode<T>> position) {
+	private void checkDoesNotCountain(Position<T> position) {
 		if (containsPositionReference(position)) {
 			throw new IllegalStateException("contains position");
 		}
 	}
 
-	private void checkContainsReference(Position<T, BiderectionalNode<T>> position) {
+	private void checkContainsReference(Position<T> position) {
 		if (containsPositionReference(position)) {
 			return;
 		}
@@ -187,22 +187,22 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 	}
 
 	@Override
-	public T replaceElement(Position<T, BiderectionalNode<T>> position, T element) throws InvalidPositionException {
+	public T replaceElement(Position<T> position, T element) throws InvalidPositionException {
 		checkContainsReference(position);
 		T oldValue = position.element();
-		position.asImplementation().setValue(element);
+		position.asImplementation(BiderectionalNode.class).setValue(element);
 		return oldValue;
 	}
 
 	@Override
-	public void swapElements(Position<T, BiderectionalNode<T>> positionA, Position<T, BiderectionalNode<T>> positionB)
+	public void swapElements(Position<T> positionA, Position<T> positionB)
 			throws InvalidPositionException {
 		// TODO do elements have to be adjacent
-		BiderectionalNode<T> nodeA = positionA.asImplementation();
+		BiderectionalNode<T> nodeA = positionA.asImplementation(BiderectionalNode.class);
 		BiderectionalNode<T> befpreA = nodeA.getPrevious();
 		BiderectionalNode<T> afterA = nodeA.getNext();
 
-		BiderectionalNode<T> nodeB = positionB.asImplementation();
+		BiderectionalNode<T> nodeB = positionB.asImplementation(BiderectionalNode.class);
 		BiderectionalNode<T> beforeB = nodeB.getPrevious();
 		BiderectionalNode<T> afterB = nodeB.getNext();
 
@@ -228,19 +228,19 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 	}
 
 	@Override
-	public Position<T, BiderectionalNode<T>> first() throws EmptyListException {
+	public Position<T> first() throws EmptyListException {
 		checkNotEmpty();
 		return header;
 	}
 
 
 	@Override
-	public Position<T, BiderectionalNode<T>> last() throws EmptyListException {
+	public Position<T> last() throws EmptyListException {
 		checkNotEmpty();
 		return trailer;
 	}
 
-	private boolean containsPositionReference(Position<T, BiderectionalNode<T>> position) {
+	private boolean containsPositionReference(Position<T> position) {
 		PositionIterator<T, BiderectionalNode<T>> positions = positionIterator();
 		while (positions.hasNextPosition()) {
 			// TODO improve reference equality

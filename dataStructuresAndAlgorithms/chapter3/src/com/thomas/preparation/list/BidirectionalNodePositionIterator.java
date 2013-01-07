@@ -23,7 +23,7 @@ public class BidirectionalNodePositionIterator<T> implements PositionIterator<T,
 	}
 
 	@Override
-	public Position<T, BiderectionalNode<T>> getNextPosition() {
+	public BiderectionalNode<T> getNextPosition() {
 		current = current.getNext();
 		return current;
 	}
