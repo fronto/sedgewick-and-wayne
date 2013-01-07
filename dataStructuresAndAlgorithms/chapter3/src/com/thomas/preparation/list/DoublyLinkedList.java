@@ -2,7 +2,7 @@ package com.thomas.preparation.list;
 
 import com.thomas.preparation.deque.BiderectionalNode;
 
-public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
+public class DoublyLinkedList<T> implements List<T> {
 
 	private BiderectionalNode<T> header;
 	private BiderectionalNode<T> trailer;
@@ -118,11 +118,10 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 	}
 
 	@Override
-	public Position<T> insertFirst(Position<T> position, T element)
+	public Position<T> insertFirst(T element)
 			throws InvalidPositionException {
 
 		//TODO check this method
-		BiderectionalNode<T> positionNode = asNode(position);
 		BiderectionalNode<T> newHeader = new BiderectionalNode<T>();
 		newHeader.setNext(header);
 		header.setPrevious(newHeader);
@@ -154,10 +153,11 @@ public class DoublyLinkedList<T> implements List<T, BiderectionalNode<T>> {
 	// }
 
 	@Override
-	public Position<T> insertLast(Position<T> positon, T element)
+	public Position<T> insertLast(T element)
 			throws InvalidPositionException {
 
-		BiderectionalNode<T> positionNode = asNode(positon);
+		BiderectionalNode<T> positionNode = new BiderectionalNode<T>();
+		positionNode.setValue(element);
 		trailer.setNext(positionNode);
 		positionNode.setPrevious(trailer);
 		trailer = positionNode;

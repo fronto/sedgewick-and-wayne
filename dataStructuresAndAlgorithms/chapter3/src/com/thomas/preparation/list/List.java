@@ -22,9 +22,9 @@ public interface List<E> {
 
 	Position<E> insertAfter(Position<E> position, E element) throws InvalidPositionException;
 
-	Position<E> insertFirst(Position<E> position, E element) throws InvalidPositionException;
+	Position<E> insertFirst(E element) throws InvalidPositionException;
 
-	Position<E> insertLast(Position<E> positon, E element) throws InvalidPositionException;
+	Position<E> insertLast(E element) throws InvalidPositionException;
 
 	E remove(Position<E> position) throws InvalidPositionException;
 
