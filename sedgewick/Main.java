@@ -8,12 +8,12 @@ public class Main {
 				sum++;
 			}
 		}
+		StdOut.println(sum);
 
 		sum = 0;
 		for(int j = 0; j < 1000; j++) {
 			sum++;
 		}
-		StdOut.println(sum);
 
 			
 		int tenLog2 = (new Double(Math.log(1000.0)/Math.log(2.0))).intValue();
