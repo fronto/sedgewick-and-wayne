@@ -2,44 +2,28 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		int[][] array = contiousArray(2, 3);
-		printIntegerArray(array);
-		array = transpose(array);
-		printIntegerArray(array);
+		
+		printLg(5);
+		printLg(8);
+		printLg(1);
+		printLg(2);
+		
+		
 		
 	}
 	
-	
-	private static int[][] contiousArray(int width, int height) {
-		int[][] array = new int[height][width];
-		int counter = 0;
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
-				counter++;
-				array[i][j] = counter;
-			}
-		}
-		return array;
-	}
-	
-	private static void printIntegerArray(int[][] array) {
-		for (int i = 0; i < array.length; i++) {
-			for (int j = 0; j < array[0].length; j++) {
-				System.out.printf("%2d",array[i][j]);
-			}
-			System.out.println();
-		}
-		System.out.println();
+	private static void printLg(int i) {
+		System.out.println("lg(" + i + ") : " + lg(i));
 	}
 
-	public static int[][] transpose(int[][] array) {
-		int[][] result = new int[array[0].length][array.length];
-		for (int i = 0; i < array.length; i++) {
-			for (int j = 0; j < array[0].length; j++) {
-				result[j][i] = array[i][j];
-			}
+	public static int lg(int n) {
+		int log = 0;
+		while((n = n /2) > 0) {
+			log++;
 		}
-		return result;
+		return log;
 	}
-
+	
+	
+	
 }
