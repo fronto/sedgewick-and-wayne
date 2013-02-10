@@ -2,19 +2,48 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		System.out.println(asBinaryNumber(6));
-
+		boolean[][] array = randomArray(5);
+		System.out.println(booleanArrayAsString(array));
+		
+		
+		
 	}
 
-	private static String asBinaryNumber(int i) {
+	public static boolean[][] randomArray(int size) {
 
-		String binaryNumber = "";
-		while (i != 0) {
-			binaryNumber = i % 2 + binaryNumber;
-			i = i / 2;
+		boolean[][] array = new boolean[size][size];
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				if (Math.random() < 0.5) {
+					array[i][j] = false;
+					continue;
+				}
+				array[i][j] = true;
+			}
 		}
-		return binaryNumber;
+		return array;
 
 	}
 
+	public static String booleanArrayAsString(boolean[][] array) {
+		StringBuilder arrayToPrint = new StringBuilder();
+		arrayToPrint.append(' ');
+		for(int t = 0; t < array.length; t++) {
+			arrayToPrint.append(t + " ");
+		}
+		arrayToPrint.append('\n');
+		
+		for (int i = 0; i < array.length; i++) {
+			arrayToPrint.append(i);
+			for (int j = 0; j < array[0].length; j++) {
+				if (array[i][j]) {
+					arrayToPrint.append("* ");
+					continue;
+				}
+				arrayToPrint.append("  ");
+			}
+			arrayToPrint.append('\n');
+		}
+		return arrayToPrint.toString();
+	}
 }
