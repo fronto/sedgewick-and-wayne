@@ -1,5 +1,4 @@
 #!/bin/bash
 
-rm Main.class
+rm *.class
 javac -cp lib/stdlib.jar:. *.java
-java -cp lib/stdlib.jar:. Main
