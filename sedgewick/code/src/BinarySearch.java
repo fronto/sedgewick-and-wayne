@@ -1,36 +1,30 @@
-
 public class BinarySearch {
 
 	public static int rank(int key, int[] a) {
 
 		int start = 0;
 		int end = a.length - 1;
-		int index = (start + end) / 2;
 
-		while (start <= end) { //TODO figure out why <= is needed
+		return rankRecursive(key, a, start, end);
+	}
 
-			index = (start + end) / 2;
+	private static int rankRecursive(int key, int[] a, int hi, int lo) {
 
-			if (a[index] == key) {
-				break;
-			}
-
-			if (a[index] < key) {
-				start = index + 1;
-			}
-
-			if (a[index] > key) {
-				end = index - 1;
-			}
-
-		}
+		int index = (hi + lo) / 2;
 
 		if (a[index] == key) {
 			return index;
 		}
 
+		if (a[index] < key) {
+			return rankRecursive(key, a, index + 1, hi);
+		}
+
+		if (a[index] > key) {
+			return rankRecursive(key, a, lo, index - 1);
+		}
+
 		return -1;
 	}
-
 
 }
