@@ -1,5 +1,5 @@
 #!/bin/bash
 
 rm *.class
-javac -cp lib/stdlib.jar:. *.java
-java -cp lib/stdlib.jar:. ${1}
+javac -cp lib/stdlib.jar:./src *.java
+java -cp lib/stdlib.jar:./src ${1}
