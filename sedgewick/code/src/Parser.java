@@ -28,7 +28,7 @@ public class Parser {
 	
 	
 	boolean canParseNextLine() {
-		return scanner.hasNextLine();
+		return scanner.hasNextLine() && scanner.hasNext();
 	}
 	
 	InputLine parseNextLine() {

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-rm Main.class
-javac -cp lib/stdlib.jar:. *.java
-java -cp lib/stdlib.jar:. Main $1
+rm src/Main.class
+javac -cp lib/stdlib.jar:. src/*.java
+java -cp lib/stdlib.jar:./src Main $1
