@@ -3,7 +3,7 @@ import java.io.PrintStream;
 public class OutputLine {
 
 	public static OutputLine compute(InputLine input) {
-		double result = input.first / input.second;
+		double result = (double) input.first / input.second;
 		return new OutputLine(input, result);
 	}
 	
@@ -16,7 +16,7 @@ public class OutputLine {
 	}
 
 	void write(PrintStream writer) {
-		writer.printf("%s %d %d %.2f\n", inputLine.name, inputLine.first, inputLine.second, result);
+		writer.printf("%s\t%d %d %.3f\n", inputLine.name, inputLine.first, inputLine.second, result);
 	}
 	
 	
