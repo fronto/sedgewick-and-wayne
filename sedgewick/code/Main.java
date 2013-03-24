@@ -1,36 +1,22 @@
+import java.io.File;
+
 public class Main {
 
-	static double logFactorial(int n) {
 
-		if(n == 1) {
-			return 0.0;
-		}
-
-		return Math.log((double) n) + logFactorial(n -1);
-
-	}
-
-	static int factorial(int n) {
-
-		if(n == 0) {
-			return 1;
-		}
-
-		if(n == 1) {
-			return 1;
-		}
-
-		return n * factorial(n-1);
-
-	}
 
 	public static void main(String[] args) {
 
-		double expected = Math.log((double) factorial(3));	
-		double actual = logFactorial(3);
-
-		System.out.printf("expected: %f  actual: %f\n", expected, actual);
-
+		File file = new File(args[0]);
+		if(!file.exists()) {
+			throw new IllegalArgumentException("non-existant file: " + file.getAbsolutePath());
+		}
+		Parser parser = Parser.createParser(file);
+		while(parser.canParseNextLine()) {
+			InputLine inputLine = parser.parseNextLine();
+			OutputLine outputLine = OutputLine.compute(inputLine);
+			outputLine.write(System.out);
+		}
+		
 	}
 
 }
