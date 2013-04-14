@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class BinarySearch {
 
 	static int numberOfcalls;
@@ -14,23 +16,28 @@ public class BinarySearch {
 
 	private static int rankRecursive(int key, int[] a, int lo, int hi) {
 
-		printRecursive(lo, hi);
+		//printRecursive(lo, hi);
 		
-		int index = (hi + lo) / 2;
+		if(lo <= hi) {
 
-		if (a[index] == key) {
-			return index;
-		}
+			int index = (hi + lo) / 2;
 
-		if (a[index] < key) {
-			return rankRecursive(key, a, index + 1, hi);
-		}
+			if (a[index] == key) {
+				return index;
+			}
 
-		if (a[index] > key) {
-			return rankRecursive(key, a, lo, index - 1);
+			if (a[index] < key) {
+				return rankRecursive(key, a, index + 1, hi);
+			}
+
+			if (a[index] > key) {
+				return rankRecursive(key, a, lo, index - 1);
+			}
+
 		}
 
 		return -1;
+
 	}
 
 	private static void printRecursive(int lo, int hi) {
@@ -43,6 +50,46 @@ public class BinarySearch {
 		stringBuilder.append("rank(").append(lo).append(", ").append(hi).append(")");
 		
 		System.out.println(stringBuilder);
+		
+	}
+	
+	
+	public static void main(String[] args) {
+
+		int[] whitelist = In.readInts(args[0]);
+		Arrays.sort(whitelist);
+
+		if("+".equals(args[1])) {
+
+			while(!StdIn.isEmpty()) {
+			
+					int key = StdIn.readInt();
+					if(rank(key, whitelist) == -1) {
+						StdOut.println(key);
+					}
+			
+			}		
+
+		}
+
+		if("-".equals(args[1])) {
+
+			while(!StdIn.isEmpty()) {
+		
+				int key = StdIn.readInt();
+				if(rank(key, whitelist) != -1) {
+					StdOut.println(key);
+				}
+		
+			}		
+
+		
+
+		}
+
+		
+		
+		
 		
 	}
 	
