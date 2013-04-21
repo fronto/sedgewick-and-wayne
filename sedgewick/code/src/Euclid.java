@@ -12,7 +12,7 @@ public class Euclid {
 	}
 
 
-	private static int findHCD(int dividend, int divisor) {
+	public static int findHCD(int dividend, int divisor) {
 		int remainder = findRemainder(dividend, divisor);
 		while(remainder != 0) {
 			dividend = divisor;
@@ -23,7 +23,7 @@ public class Euclid {
 	}
 
 
-	public static int findRemainder(int dividend, int divisor) {
+	private static int findRemainder(int dividend, int divisor) {
 		int result = dividend % divisor;
 		System.out.println(dividend + " % " + divisor + " = " + result);
 		return result;
