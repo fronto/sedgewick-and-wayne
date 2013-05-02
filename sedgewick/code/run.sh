@@ -1,6 +1,6 @@
 #!/bin/bash
 
 rm src/*.class
-CLASSPATH="lib/stdlib.jar:./src"
-javac -cp $CLASSPATH  ./src/*.java
+CLASSPATH="lib/stdlib.jar:./src:./booksite"
+javac -cp $CLASSPATH  ./src/*.java ./booksite/*java
 java -cp $CLASSPATH ${*}
