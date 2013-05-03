@@ -24,7 +24,7 @@
 
 import java.util.Arrays;
 
-public class BinarySearch {
+public class BinarySearchWithCounter {
 
     // precondition: array a[] is sorted
     public static int rank(int key, int[] a, Counter counter) {
