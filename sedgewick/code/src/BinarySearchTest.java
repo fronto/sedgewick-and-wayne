@@ -36,7 +36,7 @@ public class BinarySearchTest {
 
 		}
 
-		int rank = BinarySearch.rank(key, array);
+		int rank = MyBinarySearch.rank(key, array);
 		if (rank != -1) {
 			if (array[rank] != key) {
 				throw new IllegalArgumentException("array[" + rank
