@@ -23,10 +23,28 @@ public class Interval2D {
     }
 
     // does this interval contain x?
-    public boolean contains(Point2D p) {
+    private boolean contains(Point2D p) {
         return x.contains(p.x())  && y.contains(p.y());
     }
 
+    private Point2D[] corners() {
+    	Point2D[] corners = new Point2D[4];
+    	corners[0] = new Point2D(x.left(), y.left());
+    	corners[1] = new Point2D(x.left(), y.right());
+    	corners[2] = new Point2D(x.right(), y.left());
+    	corners[3] = new Point2D(x.right(), y.right());
+    	return corners;
+    }
+    
+    public boolean contains(Interval2D that) {
+    	for(Point2D corner : that.corners()) {
+    		if(!this.contains(corner)) {
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+    
     // area of this interval
     public double area() {
         return x.length() * y.length();
