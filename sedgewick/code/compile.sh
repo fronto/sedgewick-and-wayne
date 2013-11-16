@@ -1,5 +1,5 @@
 #!/bin/bash
 
-rm src/*.class
+rm out/*.class
 CLASSPATH="lib/stdlib.jar:./src:./booksite"
-javac -cp $CLASSPATH  ./src/*.java ./booksite/*java
+javac -cp $CLASSPATH  -d out ./src/*.java ./booksite/*java
