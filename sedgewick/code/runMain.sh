@@ -1,5 +1,6 @@
 #!/bin/bash
 
-rm src/Main.class
-javac -cp lib/stdlib.jar:. src/*.java
-java -cp lib/stdlib.jar:./src Main $1
+rm out/*.class
+STDLIB="lib/stdlib.jar"
+javac -cp $STDLIB -d out ./src/*.java ./booksite/*java 
+java -cp "$STDLIB:out" Main ${*}

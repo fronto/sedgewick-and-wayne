@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm src/*.class
-CLASSPATH="lib/stdlib.jar:./src:./booksite"
-javac -cp $CLASSPATH  ./src/*.java ./booksite/*java
-java -cp $CLASSPATH ${*}
+rm out/*.class
+STDLIB="lib/stdlib.jar"
+javac -cp $STDLIB -d out ./src/*.java ./booksite/*java 
+java -cp "$STDLIB:out" ${*}
