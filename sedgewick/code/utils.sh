@@ -11,3 +11,9 @@ function compileSources() {
 		javac -cp $STDLIB  -d out ./src/*.java ./booksite/*java
 
 }
+
+function run() {
+
+		java -cp "$STDLIB:out" ${*}
+
+}

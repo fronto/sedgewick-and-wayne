@@ -2,4 +2,4 @@
 source utils.sh
 
 compileSources
-java -cp "$STDLIB:out" Main ${*}
+run Main ${*}
