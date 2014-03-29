@@ -6,7 +6,9 @@ function summarizeJava () {
 
 function compileSources() {
 
-		rm out/*.class
+        if [ -d out ] 
+		 then rm out/*.class
+        fi
 		STDLIB="lib/stdlib.jar"
 		javac -cp $STDLIB  -d out ./src/*.java ./booksite/*java
 
