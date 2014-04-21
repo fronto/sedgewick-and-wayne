@@ -6,16 +6,16 @@ function summarizeJava () {
 
 function compileSources() {
 
-        if [ -d out ] 
-		 then rm out/*.class
+        if [ -d target ] 
+		 then rm target/*.class
         fi
 		STDLIB="lib/stdlib.jar"
-		javac -cp $STDLIB  -d out ./src/*.java ./booksite/*java
+		javac -cp $STDLIB  -d target ./src/main/java/*.java ./booksite/*java
 
 }
 
 function run() {
 
-		java -cp "$STDLIB:out" ${*}
+		java -cp "$STDLIB:target" ${*}
 
 }
