@@ -4,18 +4,20 @@ function summarizeJava () {
     grep public $1 | awk 'BEGIN{ FS=":" }{print $NF}' | sed 's/public//g'
 }
 
-function compileSources() {
+function run() {
 
-        if [ -d target ] 
-		 then rm target/*.class
-        fi
-		STDLIB="lib/stdlib.jar"
-		javac -cp $STDLIB  -d target ./src/main/java/*.java ./booksite/*java
+        STDLIB="lib/stdlib.jar"
+        BUILD_ARTIFACT="target/scala-2.10/sedgewick-and-wayne_2.10-1.0.jar"
+        
+		checkFileExists $STDLIB
+		checkFileExists $BUILD_ARTIFACT
+		java -cp "$STDLIB:$BUILD_ARTIFACT" ${*}
 
 }
 
-function run() {
-
-		java -cp "$STDLIB:target" ${*}
-
+function checkFileExists() {
+	if [ ! -f $1 ]
+		then echo "error: cannot locate $1"
+		exit
+	fi
 }
