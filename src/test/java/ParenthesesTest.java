@@ -15,7 +15,7 @@ public class ParenthesesTest {
     }
 
     @Test
-    public void erronouslyOverlapping() {
+    public void erroneouslyOverlapping() {
 
         Parentheses parser = new Parentheses();
         assertFalse(parser.balanced("[(])"));

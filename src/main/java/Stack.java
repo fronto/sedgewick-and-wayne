@@ -33,6 +33,10 @@ public class Stack<Item> {
         return item;
     }
 
+    public Item peek() {
+        return first.item;
+    }
+
 
     public static void main(String[] args) {
 
