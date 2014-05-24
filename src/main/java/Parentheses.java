@@ -3,7 +3,7 @@ public class Parentheses {
 
     boolean balanced(String input) {
 
-        Stack<Character> openParentheses = new Stack<>();
+        LinkedStack<Character> openParentheses = new LinkedStack<>();
 
         for(int i = 0; i < input.length(); i++) {
 

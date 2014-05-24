@@ -1,4 +1,4 @@
-public class FixedCapacityStackOfStrings {
+public class FixedCapacityStackOfStrings implements Stack<String> {
 
     private int index;
     private final String[] items;
@@ -13,6 +13,11 @@ public class FixedCapacityStackOfStrings {
 
     public void push(String s) {
         items[index++] = s;
+    }
+
+    @Override
+    public String peek() {
+        return items[index];
     }
 
     public String pop() {

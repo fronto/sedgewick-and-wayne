@@ -1,4 +1,4 @@
-public class DoublingStackOfStrings {
+public class DoublingStackOfStrings implements Stack<String> {
 
     private String[] items = new String[1];
     private int size = 0;

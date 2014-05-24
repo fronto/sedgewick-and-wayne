@@ -6,19 +6,17 @@ import static junit.framework.Assert.assertTrue;
 public class DoublingStackOfStringsTest {
 
 
-
     @Test
     public void pushToResizeThenPopToResize() {
 
-        DoublingStackOfStrings stack = new DoublingStackOfStrings();
+        Stack<String> stack = new DoublingStackOfStrings();
         StackTester stackTester = new StackTester(stack);
 
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
 
             stackTester.push("" + i).assertPeek("" + i);
 
         }
-
 
 
     }
@@ -30,7 +28,7 @@ public class DoublingStackOfStringsTest {
         DoublingStackOfStrings stack = new DoublingStackOfStrings();
         StackTester stackTester = new StackTester(stack);
 
-        stackTester.push(new int[] {1,2,3,4,5});
+        stackTester.push(new String[]{"1", "2", "3", "4", "5"});
 
 
         stackTester.assertPops("" + 5);
@@ -54,37 +52,37 @@ public class DoublingStackOfStringsTest {
     }
 
 
-    private static class StackTester {
+    private static class StackTester<Item> {
 
-        final DoublingStackOfStrings stack;
+        final Stack<Item> stack;
 
 
-        private StackTester(DoublingStackOfStrings stack) {
+        private StackTester(Stack<Item> stack) {
             this.stack = stack;
         }
 
-        StackTester push(int[] arr) {
-            for(int i : arr) {
-                stack.push("" + i);
+        StackTester push(Item[] arr) {
+            for (Item i : arr) {
+                stack.push(i);
             }
             return this;
 
         }
 
-        StackTester push(String value) {
+        StackTester push(Item value) {
             stack.push(value);
             assertEquals(value, stack.peek());
             return this;
         }
 
         StackTester assertPeek(String expected) {
-            String actual = stack.peek();
+            Item actual = stack.peek();
             assertEquals(expected, actual);
             return this;
         }
 
         StackTester assertPops(String expected) {
-            String actual = stack.pop();
+            Item actual = stack.pop();
             assertEquals(expected, actual);
             return this;
         }
