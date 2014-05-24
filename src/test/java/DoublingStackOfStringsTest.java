@@ -19,13 +19,36 @@ public class DoublingStackOfStringsTest {
 
         }
 
-        for(int i = 9; i >= 0; i--) {
 
-            stackTester.assertPops("" + i);
 
-        }
+    }
+
+
+    @Test
+    public void canPopOffStack() {
+
+        DoublingStackOfStrings stack = new DoublingStackOfStrings();
+        StackTester stackTester = new StackTester(stack);
+
+        stackTester.push(new int[] {1,2,3,4,5});
+
+
+        stackTester.assertPops("" + 5);
+        stackTester.assertPops("" + 4);
+        stackTester.assertPops("" + 3);
+        stackTester.assertPops("" + 2);
+        stackTester.assertPops("" + 1);
+
+    }
+
+    @Test(expected = Exception.class)
+    public void cannotPopOffEmptyStack() {
+
+        DoublingStackOfStrings stack = new DoublingStackOfStrings();
+        StackTester stackTester = new StackTester(stack);
 
         stackTester.assertIsEmpty();
+        stack.pop();
 
 
     }
@@ -38,6 +61,14 @@ public class DoublingStackOfStringsTest {
 
         private StackTester(DoublingStackOfStrings stack) {
             this.stack = stack;
+        }
+
+        StackTester push(int[] arr) {
+            for(int i : arr) {
+                stack.push("" + i);
+            }
+            return this;
+
         }
 
         StackTester push(String value) {
