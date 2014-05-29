@@ -40,7 +40,7 @@ public class DoublingStackOfStrings implements Stack<String> {
 
     public String pop() {
 
-        if(size == items.length / 4) {
+        if (size == items.length / 4) {
             resize(items.length / 2);
         }
 
@@ -49,14 +49,26 @@ public class DoublingStackOfStrings implements Stack<String> {
     }
 
     public String peek() {
-        return items[size-1];
+        return items[size - 1];
     }
 
     public static void main(String[] args) {
 
 
-        while(StdIn.hasNextLine()) {
-            StdIn.readLine();
+        Stack<String> stack = new DoublingStackOfStrings();
+
+        while (!StdIn.isEmpty()) {
+
+            String item = StdIn.readString();
+
+            if (!item.equals("-")) {
+                stack.push(item);
+
+            } else if (!stack.isEmpty()) {
+                StdOut.println(stack.pop() + " ");
+            }
+
+            StdOut.println("(" + stack.size() + " left on stack)");
         }
 
 
